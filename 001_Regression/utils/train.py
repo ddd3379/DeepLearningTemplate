@@ -21,7 +21,32 @@ from matplotlib import pyplot as plt
 
 class TrainClass():
 
-    
+    def fixSeed(self, seed):
+        """
+        乱数の初期化
+
+        Parameters
+        ----------
+        seed : int
+            シード値
+
+        Returns
+        -------
+        """
+
+        # random
+        random.seed(seed)
+
+        # Numpy
+        np.random.seed(seed)
+
+        # Pytorch
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+
+
     def train(self, model, optimizer, E, iteration, dataloader, valid=False, verbose=1):
         """
         モデルの学習時に呼び出し
@@ -134,10 +159,8 @@ class TrainClass():
 
         Returns
         -------
-        model : torch.nn.Module
-            学習済みのモデル
-        losses : dict
-            各ループごとの損失リスト(train, valid)
+        test_loss : float
+            テスト時の損失
         """
 
         # ----- test -----
