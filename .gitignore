@@ -1,5 +1,5 @@
 # data フォルダーを除外
-./data/
+data/
 
 # 002_Classification/data
-./002_Classification/data
+002_Classification/data
